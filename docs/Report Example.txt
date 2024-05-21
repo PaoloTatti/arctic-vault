@@ -1,22 +1,20 @@
- Based on the information provided, we can create the following Data Vault model:
+ 
+Based on the conversation, the following Data Vault model can be created:
 
 1. Hubs:
-   - Customers_Hub (CustomerID, LoadDate)
-   - Orders_Hub (OrderID, LoadDate)
-   - Products_Hub (ProductID, LoadDate)
-
+   - Customers (CustomerID, FirstName, LastName, Email, PhoneNumber)
+   - OrderDetails (OrderID, ProductID)
+   - Orders (OrderID, CustomerID)
+   - Products (ProductID, ProductName, Category, ListPrice)
+   
 2. Links:
-   - Customers_Orders_Link (CustomerID, OrderID, LoadDate)
-   - Orders_Products_Link (OrderID, ProductID, LoadDate)
-
+   - Customers_Orders (CustomerID, OrderID)
+   - Orders_OrderDetails (OrderID, ProductID)
+   
 3. Satellites:
-   - Products_Satellite (ProductID, ProductName, Category, ListPrice, LoadDate)
-   - Customers_Satellite (CustomerID, FirstName, LastName, Email, PhoneNumber, LoadDate)
-   - Orders_Satellite (OrderID, CustomerID, OrderDate, LoadDate)
-   - OrderDetails_Satellite (OrderID, ProductID, Quantity, UnitPrice, LoadDate)
-
-
-In this model:
-- The Hub tables contain the business keys and metadata for each entity. The primary key for each Hub table is the respective business key (e.g., CustomerID for Customers_Hub). The metadata column is the LoadDate which records when the data was first loaded into the system.
-- The Link tables connect the Hubs and represent the relationships between entities. The primary keys for the Link tables are a combination of the foreign keys from the connected Hubs (e.g., CustomerID and OrderID for Customers_Orders_Link). The metadata column is the LoadDate which records when the relationship was first established.
-- The Satellite tables store additional attributes about their parent Hub or Link. The primary key for each Satellite table is a combination of its parent's primary key and the metadata column LoadDate. This allows us to track changes in attributes over time.
+   - Customers_Satellite (CustomerID, LoadDate, RecordSource)
+   - OrderDetails_Satellite (OrderID, LoadDate, RecordSource)
+   - Orders_Satellite (OrderID, LoadDate, RecordSource)
+   - Products_Satellite (ProductID, LoadDate, RecordSource)
+   
+In this Data Vault model, the Hubs represent the main entities of interest to the business. The Links connect the Hubs and record the relationships between them. Finally, the Satellites provide additional information about the parent Hub or Link and include metadata about when the data was loaded and from where.

@@ -1,6 +1,3 @@
-import streamlit as st
-
-
 SYSTEM_PROMPT_DA = """Your task is to analyze the tables provided by the user and ensure that all requirements for building a Data Vault model are met.
 Instructions:
 - Identify entities, relationships, and attributes within the tables.

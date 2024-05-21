@@ -7,7 +7,7 @@ from arcticvault.ui_functions import render_app_logo
 
 
 st.set_page_config(
-    page_title="❄️ Arctic Data Engineer ❄️",
+    page_title="Arctic Data Engineer",
     page_icon="💻",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -56,15 +56,10 @@ with st.sidebar:
                 .getvalue()
                 .decode("utf-8")
             )
-            st.write(report_file)
-
-if "data_engineer_chat" not in st.session_state.keys():
-    st.session_state["data_engineer_chat"] = []
-
-sql_code_generation_column, chat_session_data_vault = st.columns(2)
+            st.write(report_file, unsafe_allow_html=True)
 
 if st.session_state.get("report_data_analysis", None) is not None:
-    # with sql_code_generation_column:
+
     if st.button("Generate SQL code", use_container_width=True):
         
         input_report = st.session_state.get("report_data_analysis").getvalue().decode("utf-8")
@@ -134,6 +129,7 @@ if st.session_state.get("report_data_analysis", None) is not None:
         sql_code_satellites = "```sql\n"+ extract_sql_blocks(response_satellites) + "```"
         st.write(sql_code_satellites, unsafe_allow_html=True)
                 
-
+else:
+    st.warning("Before proceeding with the SQL code generation, provide on the left side a report in txt format")
 
         

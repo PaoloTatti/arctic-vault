@@ -7,34 +7,6 @@ from streamlit.runtime.uploaded_file_manager import UploadedFile
 
 from arcticvault.data_analyst.data_analyst import DataAnalystAssistant
 
-@st.experimental_dialog("Add your data", width="large")
-def add_data_table():
-    documents = st.file_uploader(
-        label="Upload all tables you want to add to your Data Vault",
-        type=["csv"],
-        accept_multiple_files=True,
-        help="Upload one or multiple csv files",
-        key="analyst_documents",
-    )
-    
-    if st.session_state.get("analyst_documents", None) is not None:
-        _ = st.selectbox(
-            label="Select a table you wish to inspect",
-            options=st.session_state.get("analyst_documents", []),
-            key="analyst_table_visualize",
-            index=None,
-            format_func=lambda x: x.name,
-        )
-        df_file_name = st.session_state.get("analyst_table_visualize", None)
-        if df_file_name is not None:
-            st.dataframe(df_file_name)
-
-    if st.button("Close"):
-        if st.session_state.get("analyst_documents", None) is not None:
-            format_tables(tables=documents)
-            st.rerun()
-
-
 def format_tables(tables: List[UploadedFile]) -> None:
     """
     Format and display metadata information for a list of uploaded CSV tables.

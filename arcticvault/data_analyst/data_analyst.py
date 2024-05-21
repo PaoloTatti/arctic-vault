@@ -1,6 +1,6 @@
 from typing import Dict, List, Tuple, Union
 
-from arcticvault.data_analyst.config import (
+from arcticvault.data_analyst.prompts import (
     SYSTEM_PROMPT_DA,
     SYSTEM_PROMPT_GENERATION_REPORT,
 )

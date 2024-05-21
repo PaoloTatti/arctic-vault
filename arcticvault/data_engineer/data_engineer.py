@@ -1,5 +1,5 @@
 from typing import Dict, Union
-from arcticvault.data_engineer.config import (
+from arcticvault.data_engineer.prompts import (
     SYSTEM_PROMPT_SQL_GENERATION_HUBS, 
     SYSTEM_PROMPT_SQL_GENERATION_LINKS, 
     SYSTEM_PROMPT_SQL_GENERATION_SATELLITES

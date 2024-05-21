@@ -1,5 +1,4 @@
 import re
-import streamlit as st
 
 def extract_sql_blocks(text: str) -> str:
     """
